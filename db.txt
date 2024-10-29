@@ -1,0 +1,51 @@
+User
+- uid
+- name
+- address
+- create_at
+- review_id []
+- appointment_id []
+
+Doctor
+- doctor_id
+- name
+- description
+- photoURL
+- location_id
+- specialist_id
+- schedule_id []
+
+Schedule 
+- schedule_id
+- doctor_id
+- appointment_id (null/id)
+- start_time
+- end_time
+- price
+
+Specialist
+- id
+- name
+- doctor_id []
+
+Location
+- id
+- name
+- longitude
+- latitude
+- doctor_id []
+
+Appointment
+- appointment_id
+- schedule_id
+- uid
+- review_id (null/id)
+- Status (done/pending/expired)
+
+Review
+- review_id
+- appointment_id
+- star
+- review
+
+
