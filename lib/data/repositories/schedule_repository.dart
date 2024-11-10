@@ -35,4 +35,13 @@ class ScheduleRepository {
       return Left(UnexpectedFailure(AppStrings.unexpectedError));
     }
   }
+
+  Future<Either<Failure, void>> updateSchedule(ScheduleModel schedule) async {
+    try {
+      await _datasource.updateSchedule(schedule);
+      return Right(null);
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
 }

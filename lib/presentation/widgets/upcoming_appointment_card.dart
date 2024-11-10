@@ -76,13 +76,19 @@ class UpcomingAppointmentCard extends StatelessWidget {
                                     ),
                                     Text(
                                       state.specialistList[index].name, 
-                                      style: AppTextStyles.body2Semi!.copyWith(color: AppColors.shadowText),)
+                                      style: AppTextStyles.body2Semi!.copyWith(color: AppColors.shadowText),),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                      Text('${state.doctorList[index].star}', style: AppTextStyles.body2Medium!.copyWith(color: Colors.white),),
+                                      Image.asset(AppIcons.star)
+                                    ],)
                                   ],
                                 ),
                                 Image.asset(
                                   AppIcons.kebab,
                                   color: Colors.white,
-                                )
+                                ),
                               ],
                             ),
                           ),

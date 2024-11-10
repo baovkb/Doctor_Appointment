@@ -1,7 +1,9 @@
 import 'package:doctor_appointment/core/constants/route_name.dart';
+import 'package:doctor_appointment/presentation/view/appointment_detail_view.dart';
 import 'package:doctor_appointment/presentation/view/bookings_view.dart';
 import 'package:doctor_appointment/presentation/view/change_password_view.dart';
 import 'package:doctor_appointment/presentation/view/chat_view.dart';
+import 'package:doctor_appointment/presentation/view/doctor_infor_view.dart';
 import 'package:doctor_appointment/presentation/view/forgot_password_view.dart';
 import 'package:doctor_appointment/presentation/view/home_view.dart';
 import 'package:doctor_appointment/presentation/view/login_email_view.dart';
@@ -70,6 +72,28 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (_) => ProfileView(),
           settings: RouteSettings(name: RouteName.PROFILE_PAGE)
+        );
+      case RouteName.DOCTOR_INFO_PAGE:
+      final args = settings.arguments as Map<String, dynamic>;
+
+        return MaterialPageRoute(
+          builder: (_) => DoctorInforView(
+            doctorModel: args['doctor'], 
+            specialistModel: args['specialist'],
+            locationModel: args['location'],
+            scheduleModel: args['schedule'],),
+          settings: RouteSettings(name: RouteName.DOCTOR_INFO_PAGE));
+      case RouteName.APPOINTMENT_DETAIL:
+      final args = settings.arguments as Map<String, dynamic>;
+
+        return MaterialPageRoute(
+          builder: (_) => AppointmentDetailView(
+            doctorModel: args['doctor'], 
+            specialistModel: args['specialist'],
+            locationModel: args['location'],
+            scheduleModel: args['schedule'],
+          ),
+          settings: RouteSettings(name: RouteName.APPOINTMENT_DETAIL)
         );
       default:
         return MaterialPageRoute(

@@ -29,4 +29,18 @@ class SpecialistRepository {
       return Left(UnexpectedFailure(AppStrings.unexpectedError));
     }
   }
+
+  Future<Either<Failure, List<SpecialistModel>>> searchSpecialistByName(String name) async {
+    try {
+      List<SpecialistModel>? specialistList = await _datasource.getSpecialists();
+      if (specialistList == null) return Left(DataNotFoundFailure(AppStrings.dataNotFound));
+
+      return Right(specialistList
+        .where(
+          (specialist) => specialist.name.toLowerCase().contains(name))
+        .toList());
+    } catch (e) {
+      return Left(UnexpectedFailure(AppStrings.unexpectedError));
+    }
+  }
 }

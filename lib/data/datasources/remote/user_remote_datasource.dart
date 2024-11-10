@@ -33,10 +33,10 @@ class UserRemoteDatasource {
     if (!snapshot.exists || snapshot.value == null) return null;
 
     Map<Object?, Object?> data = snapshot.value as Map<Object?, Object?>;
-      List<UserModel> userList = [];
-      data.forEach((key, value) {
-        userList.add(UserModel.fromMap(value as Map<Object?, Object?>));
-      });
+    List<UserModel> userList = [];
+    data.forEach((key, value) {
+      userList.add(UserModel.fromMap(value as Map<Object?, Object?>));
+    });
     return userList;
   }
 
@@ -51,5 +51,9 @@ class UserRemoteDatasource {
   Future<void> sendPasswordResetEmail(String email) {
     return _auth.sendPasswordResetEmail(
       email: email);
+  }
+
+  Future<void> updateUser(UserModel user) {
+    return _userRef.child(user.uid).update(user.toMap());
   }
 }

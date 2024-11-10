@@ -14,4 +14,22 @@ class AppointmentRemoteDatasource {
 
     return AppointmentModel.fromMap(snapshot.value as Map<Object?, Object?>);
   }
+
+  Future<AppointmentModel> addAppointment({
+    required String schedule_id, 
+    required String uid, 
+    String? message,
+    required AppointmentStatus status}) async {
+      String key = _appointmentRef.push().key!;
+      AppointmentModel appointment = AppointmentModel(
+        id: key, 
+        schedule_id: schedule_id, 
+        uid: uid, 
+        message: message,
+        status: status
+      );
+
+      await _appointmentRef.child(key).set(appointment.toMap());
+      return appointment;
+  }
 }

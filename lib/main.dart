@@ -1,9 +1,12 @@
 import 'package:doctor_appointment/core/utils/app_shared_prefs.dart';
 import 'package:doctor_appointment/core/utils/locator.dart';
 import 'package:doctor_appointment/data/models/user_model.dart';
+import 'package:doctor_appointment/presentation/blocs/add_appointment_cubit.dart';
 import 'package:doctor_appointment/presentation/blocs/auth_bloc.dart';
 import 'package:doctor_appointment/presentation/blocs/category_cubit.dart';
 import 'package:doctor_appointment/presentation/blocs/available_schedule_cubit.dart';
+import 'package:doctor_appointment/presentation/blocs/schedule_search_cubit.dart';
+import 'package:doctor_appointment/presentation/blocs/schedules_by_ids_cubit.dart';
 import 'package:doctor_appointment/presentation/blocs/user_cubit.dart';
 import 'package:doctor_appointment/presentation/notifiers/theme_notifier.dart';
 import 'package:doctor_appointment/route_generator.dart';
@@ -67,7 +70,10 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<ThemeNotifier>(create: (_) => themeNotifier),
         BlocProvider<UserCubit>(create: (_) => UserCubit()),
         BlocProvider<CategoryCubit>(create: (_) => CategoryCubit()),
-        BlocProvider<AvailableScheduleCubit>(create: (_) => AvailableScheduleCubit())
+        BlocProvider<AvailableScheduleCubit>(create: (_) => AvailableScheduleCubit()),
+        BlocProvider<ScheduleSearchCubit>(create: (_) => ScheduleSearchCubit()),
+        BlocProvider<SchedulesByIDsCubit>(create: (_) => SchedulesByIDsCubit()),
+        BlocProvider<AddAppointmentCubit>(create: (_) => AddAppointmentCubit())
       ],
       child: Consumer<ThemeNotifier>(
         builder: (BuildContext context, ThemeNotifier value, Widget? child) { 

@@ -20,4 +20,22 @@ class AppointmentRepository {
       return const Left(UnexpectedFailure(AppStrings.unexpectedError));
     }
   }
+
+  Future<Either<Failure, AppointmentModel>> addAppointment ({
+    required String schedule_id, 
+    required String uid, 
+    String? message,
+    required AppointmentStatus status}) async {
+      try {
+        final appointment = await _datasource.addAppointment(
+          schedule_id: schedule_id, 
+          uid: uid, 
+          message: message, 
+          status: status
+        );
+        return Right(appointment);
+      } catch (e) {
+        return const Left(UnexpectedFailure(AppStrings.unexpectedError));
+      }
+    }
 }

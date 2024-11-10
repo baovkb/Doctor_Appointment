@@ -10,4 +10,6 @@ class RouteName {
   static const String BOOKINGS_PAGE = '/bookings';
   static const String CHAT_PAGE = '/chat';
   static const String PROFILE_PAGE = '/profile';
+  static const String DOCTOR_INFO_PAGE = '/doctor_info';
+  static const String APPOINTMENT_DETAIL = '/appointment_detail';
 }

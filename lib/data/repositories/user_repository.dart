@@ -129,13 +129,23 @@ class UserRepository {
     UserModel? userModel = forceUpdate ? null : _userBox.get(uid);
     if (userModel == null) {
       final either =  await getUserByUID(uid);
-      return either.fold(
+      return await either.fold(
         (failure) => Left(failure), 
-        (user) {
-          _userBox.put(uid, user);
+        (user) async {
+          await _userBox.put(uid, user);
           return Right(user);
         }
       );
     } else return Right(userModel);
+  }
+
+  Future<Either<Failure, void>> updateUser(UserModel user) async {
+    try {
+      await _datasource.updateUser(user);
+      await _userBox.put(user.uid, user);
+      return Right(null);
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
   }
 }

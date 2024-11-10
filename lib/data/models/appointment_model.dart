@@ -4,6 +4,7 @@ class AppointmentModel {
   String schedule_id;
   String uid;
   String? review_id;
+  String? message;
   AppointmentStatus status;
 
   AppointmentModel({
@@ -11,6 +12,7 @@ class AppointmentModel {
     required this.schedule_id,
     required this.uid,
     this.review_id,
+    this.message,
     required this.status,
   });
 
@@ -20,15 +22,17 @@ class AppointmentModel {
     schedule_id: map['schedule_id'] as String,
     uid: map['uid'] as String,
     review_id: map['review_id'] as String?,
+    message: map['message'] as String?,
     status: AppointmentStatus.values.byName(map['status'] as String)
   );
 
-  Map<Object?, Object?> toMap(AppointmentModel appointment) {
+  Map<String, Object?> toMap() {
     return {
       'id': id,
       'schedule_id': schedule_id,
       'uid': uid,
       'review_id': review_id,
+      'message': message,
       'status': status.name
     };
   }

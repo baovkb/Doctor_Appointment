@@ -23,4 +23,8 @@ class ScheduleRemoteDatasource {
       .map((mapSche) => ScheduleModel.fromMap(mapSche as Map<Object?, Object?>))
       .toList();
   }
+
+  Future<void> updateSchedule(ScheduleModel schedule) {
+    return _scheduleRef.child(schedule.id).update(schedule.toMap());
+  }
 }

@@ -48,8 +48,8 @@ class UserModel {
       address: map['address'] as String?, 
       create_at: map['create_at'] as String?,
       photoURL: map['photoURL'] as String?,
-      review_id: (map['review_id'] as List<Object?>?)?.cast<String>(),
-      appointment_id: (map['appointment_id'] as List<Object?>?)?.cast<String>()
+      review_id: (map['review_id'] as List<Object?>?)?.cast<String>().toList(),
+      appointment_id: (map['appointment_id'] as List<Object?>?)?.cast<String>().toList()
     );
 
   UserModel.fromUserCredential(UserCredential userCredential):
@@ -59,7 +59,7 @@ class UserModel {
       name: userCredential.user?.displayName,
     );
 
-  Map<Object?, Object?> toMap() {
+  Map<String, Object?> toMap() {
     return {
       'uid': uid,
       'email': email,

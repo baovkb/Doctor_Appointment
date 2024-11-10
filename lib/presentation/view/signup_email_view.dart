@@ -59,6 +59,16 @@ class _SignupEmailViewState extends State<SignupEmailView> {
       _hintColor = AppColors.gray1;
     }
   }
+
+  @override
+  void dispose() {
+    _fullNameController.dispose();
+    _emailController.dispose();
+    _inputFullNameController.dispose();
+    _inputEmailController.dispose();
+
+    super.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {

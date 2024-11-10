@@ -57,6 +57,14 @@ class _LoginViewState extends State<LoginView> {
       _hintColor = AppColors.gray1;
     }
   }
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    _inputPasswordController.dispose();
+    
+    super.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {

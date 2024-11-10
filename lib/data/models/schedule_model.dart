@@ -1,11 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-class ScheduleModel {
+import 'package:equatable/equatable.dart';
+
+class ScheduleModel extends Equatable{
   String id;
   String doctor_id;
   String? appointment_id;
   String start_time;
   String end_time;
   double price;
+
+    @override
+  // TODO: implement props
+  List<Object?> get props => [id, doctor_id, appointment_id, start_time, end_time, price];
 
   ScheduleModel({
     required this.id,
@@ -26,7 +32,7 @@ class ScheduleModel {
     price: (map['price'] as num).toDouble()
   );
 
-  Map<Object?, Object?> toMap() {
+  Map<String, Object?> toMap() {
     return {
       'id': id,
       'doctor_id': doctor_id,

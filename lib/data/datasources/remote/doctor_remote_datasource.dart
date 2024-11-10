@@ -14,4 +14,12 @@ class DoctorRemoteDatasource {
     if (!snapshot.exists || snapshot.value == null) return null;
     return DoctorModel.fromMap(snapshot.value as Map<Object?, Object?>);
   }
+
+  Future<List<DoctorModel>?> getDoctors() async {
+    DataSnapshot snapshot = await _doctorRef.get();
+    if (!snapshot.exists || snapshot.value == null) return null;
+    return (snapshot.value as Map<Object?, Object?>).values
+      .map((mapDoc) => DoctorModel.fromMap(mapDoc as Map<Object?, Object?>))
+      .toList();
+  }
 }

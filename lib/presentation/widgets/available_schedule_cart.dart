@@ -17,6 +17,7 @@ class AvailableScheduleCart extends StatelessWidget {
   final ScheduleModel schedule;
   final LocationModel location;
   final SpecialistModel specialist;
+  final void Function(DoctorModel doctor, ScheduleModel schedule, LocationModel location, SpecialistModel specialist)? onCardTap;
 
   const AvailableScheduleCart({
     super.key, 
@@ -27,61 +28,70 @@ class AvailableScheduleCart extends StatelessWidget {
     required this.doctor, 
     required this.schedule, 
     required this.location, 
-    required this.specialist});
+    required this.specialist,
+    this.onCardTap});
 
   @override
   Widget build(BuildContext context) {
     List<String> startTimeSp = schedule.start_time.split(' ');
     List<String> endTimeSp = schedule.end_time.split(' ');
 
-    return Container(
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 32,
-                height: 32,
-                margin: EdgeInsets.only(right: 8),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(width: 0.5, color: Colors.white),
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(doctor.photoURL??AppImages.defaultAvatar)),
+    return GestureDetector(
+      onTap: () {
+        onCardTap?.call(doctor, schedule, location, specialist);
+      },
+      child: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: bgColor,
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 32,
+                  height: 32,
+                  margin: EdgeInsets.only(right: 8),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(width: 0.5, color: Colors.white),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(doctor.photoURL??AppImages.defaultAvatar)),
+                  ),
                 ),
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(doctor.name, style: AppTextStyles.body2Semi!.copyWith(color: mainTextColor)),
-                  Text(
-                    '${specialist.name} | ${location.name}', 
-                    style: AppTextStyles.body2Regular!.copyWith(color: secondaryTextColor, height: 1.6),),
-                  SizedBox(height: 8,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset(AppIcons.time, color: mainTextColor,),
-                      SizedBox(width: 8,),
-                      Text('${startTimeSp[0]} - ${endTimeSp[0]}', style: AppTextStyles.body2Medium!.copyWith(color: mainTextColor),)
-                    ],
-                  )
-                ],
-              )
-            ],
-          ),
-          SizedBox(height: 16,),
-          Center(child: button)
-        ],
-      ));
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(doctor.name, style: AppTextStyles.body2Semi!.copyWith(color: mainTextColor)),
+                    Text(
+                      '${specialist.name} | ${location.name}', 
+                      style: AppTextStyles.body2Regular!.copyWith(color: secondaryTextColor, height: 1.6),),
+                    SizedBox(height: 8,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text('${doctor.star}', style: AppTextStyles.body2Semi!.copyWith(color: mainTextColor),),
+                        Image.asset(AppIcons.star),
+                        SizedBox(width: 16,),
+                        Image.asset(AppIcons.time, color: mainTextColor,),
+                        SizedBox(width: 8,),
+                        Text('${startTimeSp[0]} - ${endTimeSp[0]}', style: AppTextStyles.body2Medium!.copyWith(color: mainTextColor),)
+                      ],
+                    )
+                  ],
+                )
+              ],
+            ),
+            SizedBox(height: 16,),
+            Center(child: button)
+          ],
+        )),
+    );
   }
 }

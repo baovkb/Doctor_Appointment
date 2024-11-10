@@ -20,4 +20,17 @@ class DoctorRepository {
       return const Left(UnexpectedFailure(AppStrings.unexpectedError));
     }
   }
+
+  Future<Either<Failure, List<DoctorModel>>> searchDoctorByName(String name) async {
+    try {
+      List<DoctorModel>? doctorList = await _datasource.getDoctors();
+      if (doctorList == null) return const Left(DataNotFoundFailure(AppStrings.dataNotFound));
+
+      List<DoctorModel> results = doctorList.where((doctor) => doctor.name.toLowerCase().contains(name)).toList();
+      return Right(results);
+      
+    } catch (e) {
+      return const Left(UnexpectedFailure(AppStrings.unexpectedError));
+    }
+  }
 }

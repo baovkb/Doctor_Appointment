@@ -1,3 +1,4 @@
+import 'package:doctor_appointment/core/constants/route_name.dart';
 import 'package:doctor_appointment/core/resources/colors.dart';
 import 'package:doctor_appointment/core/resources/fonts.dart';
 import 'package:doctor_appointment/core/resources/icons.dart';
@@ -12,13 +13,12 @@ import 'package:doctor_appointment/presentation/notifiers/theme_notifier.dart';
 import 'package:doctor_appointment/presentation/view/bookings_view.dart';
 import 'package:doctor_appointment/presentation/view/chat_view.dart';
 import 'package:doctor_appointment/presentation/view/profile_view.dart';
+import 'package:doctor_appointment/presentation/view/search_view.dart';
 import 'package:doctor_appointment/presentation/widgets/available_schedule_cart.dart';
 import 'package:doctor_appointment/presentation/widgets/base_button.dart';
 import 'package:doctor_appointment/presentation/widgets/small_gray_button.dart';
 import 'package:doctor_appointment/presentation/widgets/small_primary_button.dart';
-import 'package:doctor_appointment/presentation/widgets/small_secondary_button.dart';
 import 'package:doctor_appointment/presentation/widgets/upcoming_appointment_card.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
@@ -78,7 +78,6 @@ class _HomeViewState extends State<HomeView> {
       const ProfileView()
     ];
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -182,17 +181,23 @@ class _HomeViewState extends State<HomeView> {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(), 
                   itemBuilder: (context, index) {
-                  if (state.doctorList[index] == null) return SizedBox();
-
-                  return AvailableScheduleCart(
-                    bgColor: _categoryBg, 
-                    mainTextColor: _mainTextColor, 
-                    secondaryTextColor: _welcomeTextColor, 
-                    button: _bookButton, 
-                    doctor: state.doctorList[index]!, 
-                    schedule: state.scheduleList[index], 
-                    location: state.locationList[index]!, 
-                    specialist: state.specialistList[index]!);
+                    return AvailableScheduleCart(
+                      bgColor: _categoryBg, 
+                      mainTextColor: _mainTextColor, 
+                      secondaryTextColor: _welcomeTextColor, 
+                      button: _bookButton, 
+                      doctor: state.doctorList[index], 
+                      schedule: state.scheduleList[index], 
+                      location: state.locationList[index], 
+                      specialist: state.specialistList[index],
+                      onCardTap: (doctor, location, schedule, specialist) {
+                        Navigator.pushNamed(context, RouteName.DOCTOR_INFO_PAGE, arguments: {
+                          'doctor': state.doctorList[index],
+                          'specialist': state.specialistList[index],
+                          'location': state.locationList[index],
+                          'schedule': state.scheduleList[index]
+                        });
+                      },);
                 });
               } else {
                 return Text('error');
@@ -317,9 +322,22 @@ class _HomeViewState extends State<HomeView> {
               } else return SizedBox();
             },
           ),
-          Image.asset(
-            AppIcons.search,
-            color: _mainTextColor,)
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(
+                PageRouteBuilder(
+                  opaque: false,
+                  pageBuilder: (BuildContext context, _, __) => SearchView(),
+                  // transitionsBuilder: (_, anim, __, child) {
+                  //   return FadeTransition(opacity: anim, child: child);
+                  // },
+                ),
+              );
+            },
+            child: Image.asset(
+              AppIcons.search,
+              color: _mainTextColor,),
+          )
         ],
       ),
     );

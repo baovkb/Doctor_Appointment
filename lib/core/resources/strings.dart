@@ -66,5 +66,26 @@ class AppStrings {
   static const String upComApp = 'Upcoming Appointment';
   static const String category = 'Category';
   static const String seeAll = 'See all';
+
+  //search
+  static const String searchHint = 'Search for doctor';
+  static const String result = 'Result';
+
+  //doctor info
+  static const String doctorInfoTitle = 'Doctor\'s Info';
+  static const String description = 'Description';
+  static const String schedules = 'Schedules';
+  static const String schedule = 'Schedule';
+
+  //appointment info
+  static const String appointmentDetailTitle = 'Appointment Details';
+  static const String date = 'Date';
+  static const String time = 'Time';
+  static const String location = 'Location';
+  static const String price = 'Price';
+  static const String message = 'Message';
+  static const String hintTextMsgForDoctor = 'Write a message for the doctor';
+  static const String bookedAppmError = 'This schedule was booked by another user';
+  static const String bookSuccess = 'Your appointment booking completed';
 }
 

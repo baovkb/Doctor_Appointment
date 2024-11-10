@@ -17,6 +17,7 @@ class AppIcons {
   static const String kebab = 'assets/icons/Kebab.png';
   static const String calendar = 'assets/icons/Calender.png';
   static const String time = 'assets/icons/Time.png';
+  static const String close = 'assets/icons/close.png';
   
   //category
   static const String heart = 'assets/icons/Cadiologist.png';
@@ -27,4 +28,7 @@ class AppIcons {
   static const String brain = 'assets/icons/Neurologists.png';
   static const String mental = 'assets/icons/Psychiatrists.png';
   static const String liver = 'assets/icons/Hepatologists.png';
+  
+  // appointment card
+  static const String star = 'assets/icons/Star.png';
 }

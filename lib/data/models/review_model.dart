@@ -19,7 +19,7 @@ class ReviewModel {
     review: map['review'] as String?
   );
 
-  Map<Object?, Object?> toMap() {
+  Map<String, Object?> toMap() {
     return {
       'id': id,
       'appointment_id': appointment_id,

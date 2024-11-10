@@ -69,6 +69,16 @@ class _SignupViewState extends State<SignupView> {
   }
 
   @override
+  void dispose() {
+    _inputPasswordController.dispose();
+    _inputConfirmPasswordController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

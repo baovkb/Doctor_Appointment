@@ -19,16 +19,16 @@ class LocationModel {
     name: map['name'] as String,
     longitude: map['longitude'] as String,
     latitude: map['latitude'] as String,
-    doctor_id: (map['doctor_id'] as List<Object?>?)?.cast<String>()
+    doctor_id: (map['doctor_id'] as List<Object?>?)?.cast<String>().toList()
   );
 
-  Map<Object?, Object?> toMap(LocationModel location) {
+  Map<String, Object?> toMap() {
     return {
-      'id': location.id,
-      'name': location.name,
-      'longitude': location.longitude,
-      'latitude': location.latitude,
-      'doctor_id': location.doctor_id
+      'id': id,
+      'name': name,
+      'longitude': longitude,
+      'latitude': latitude,
+      'doctor_id': doctor_id
     };
   }
 }

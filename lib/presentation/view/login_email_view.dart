@@ -58,6 +58,9 @@ class _LoginViewState extends State<LoginEmailView> {
 
   @override
   void dispose() {
+    _textEditingController.dispose();
+    _inputFieldController.dispose();
+
     super.dispose();
   }
 

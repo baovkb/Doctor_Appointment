@@ -14,10 +14,10 @@ class SpecialistModel {
   this(
     id: map['id'] as String,
     name: map['name'] as String,
-    doctor_id: (map['doctor_id'] as List<Object?>?)?.cast<String>()
+    doctor_id: (map['doctor_id'] as List<Object?>?)?.cast<String>().toList()
   );
 
-  Map<Object?, Object?> toMap() {
+  Map<String, Object?> toMap() {
     return {
       'id': id,
       'name': name,
