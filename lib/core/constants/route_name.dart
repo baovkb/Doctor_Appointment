@@ -12,4 +12,5 @@ class RouteName {
   static const String PROFILE_PAGE = '/profile';
   static const String DOCTOR_INFO_PAGE = '/doctor_info';
   static const String APPOINTMENT_DETAIL = '/appointment_detail';
+  static const String REVIEW = '/review';
 }

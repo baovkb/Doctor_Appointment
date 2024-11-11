@@ -145,7 +145,8 @@ class _HomeViewState extends State<HomeView> {
                   Text(AppStrings.upComApp, style: AppTextStyles.h3Bold!.copyWith(color: _mainTextColor)),
                   Container(
                     margin: EdgeInsets.only(top: 24),
-                    child: UpcomingAppointmentCard())
+                    child: UpcomingAppointmentCard()
+                  )
                 ],
               ),
             ),
@@ -181,6 +182,17 @@ class _HomeViewState extends State<HomeView> {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(), 
                   itemBuilder: (context, index) {
+
+                    _bookButton.onPress = () {
+                      Navigator.pushNamed(context, RouteName.APPOINTMENT_DETAIL, arguments: {
+                        'doctor': state.doctorList[index],
+                        'specialist': state.specialistList[index],
+                        'location': state.locationList[index],
+                        'schedule': state.scheduleList[index],
+                        'viewMode': false
+                      });
+                    };
+
                     return AvailableScheduleCart(
                       bgColor: _categoryBg, 
                       mainTextColor: _mainTextColor, 

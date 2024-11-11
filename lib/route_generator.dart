@@ -10,6 +10,7 @@ import 'package:doctor_appointment/presentation/view/login_email_view.dart';
 import 'package:doctor_appointment/presentation/view/login_view.dart';
 import 'package:doctor_appointment/presentation/view/onboarding_view.dart';
 import 'package:doctor_appointment/presentation/view/profile_view.dart';
+import 'package:doctor_appointment/presentation/view/review_view.dart';
 import 'package:doctor_appointment/presentation/view/signup_email_view.dart';
 import 'package:doctor_appointment/presentation/view/signup_view.dart';
 import 'package:flutter/material.dart';
@@ -92,9 +93,21 @@ class RouteGenerator {
             specialistModel: args['specialist'],
             locationModel: args['location'],
             scheduleModel: args['schedule'],
+            appointmentModel: args['appointment'],
+            viewMode: args['viewMode']??true,
           ),
           settings: RouteSettings(name: RouteName.APPOINTMENT_DETAIL)
         );
+      case RouteName.REVIEW:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => ReviewView(
+            doctorModel: args['doctor'], 
+            specialistModel: args['specialist'], 
+            locationModel: args['location'], 
+            scheduleModel: args['schedule'], 
+            appointmentModel: args['appointment'],
+            review: args['review'],));
       default:
         return MaterialPageRoute(
           builder: (_) => const OnboardingView(),

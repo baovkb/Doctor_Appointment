@@ -87,5 +87,20 @@ class AppStrings {
   static const String hintTextMsgForDoctor = 'Write a message for the doctor';
   static const String bookedAppmError = 'This schedule was booked by another user';
   static const String bookSuccess = 'Your appointment booking completed';
+
+  //bookings
+  static const String upcomingTab = 'Upcoming';
+  static const String pastTab = 'Past';
+  
+  //review
+  static const String writeReviewTitle = 'Write a review';
+  static const String readReviewTitle = 'Your review';
+  static const String review = 'Review';
+  static const String rateMsg = 'How was your experience with';
+  static const String ratedMsg = 'You wrote a review for';
+  static const String writeReview = 'Write your review';
+  static const String writeReviewHint = 'Write your experience';
+  static const String submitReview = 'Submit review';
+  static const String reviewExist = 'This appointment has already had a review';
 }
 

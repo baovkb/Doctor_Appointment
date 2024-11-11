@@ -37,5 +37,25 @@ class AppointmentRepository {
       } catch (e) {
         return const Left(UnexpectedFailure(AppStrings.unexpectedError));
       }
+  }
+
+  Future<Either<Failure, void>> updateAppointment({
+    required String appointment_id, 
+    String? schedule_id, 
+    String? uid, 
+    String? review_id,
+    AppointmentStatus? status
+  }) async {
+    try {
+      await _datasource.updateAppointment(
+        appointment_id: appointment_id, 
+        schedule_id: schedule_id, 
+        uid: uid, 
+        review_id: review_id, 
+        status: status);
+      return Right(null);
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
     }
+  }
 }

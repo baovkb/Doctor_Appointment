@@ -33,4 +33,31 @@ class DoctorRepository {
       return const Left(UnexpectedFailure(AppStrings.unexpectedError));
     }
   }
+
+  Future<Either<Failure, void>> updateDoctor({
+    required String id,
+    String? name,
+    String? description,
+    String? photoURL,
+    double? star,
+    String? location_id,
+    String? specialist_id,
+    List<String>? schedule_id
+  }) async {
+    try {
+      await _datasource.updateDoctor(
+        id: id,
+        name: name,
+        description: description,
+        photoURL: photoURL,
+        star: star,
+        location_id: location_id,
+        specialist_id: specialist_id,
+        schedule_id: schedule_id
+      );
+      return Right(null);
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
 }

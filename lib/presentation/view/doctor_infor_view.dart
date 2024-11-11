@@ -65,8 +65,6 @@ class _DoctorInforViewState extends State<DoctorInforView> {
 
   @override
   void dispose() {
-    _selectNotifer.dispose();
-
     super.dispose();
   }
 
@@ -234,7 +232,8 @@ class _DoctorInforViewState extends State<DoctorInforView> {
                       'doctor': widget.doctorModel,
                       'schedule': _selectNotifer.selectedSchedule,
                       'location': widget.locationModel,
-                      'specialist': widget.specialistModel
+                      'specialist': widget.specialistModel,
+                      'viewMode': false,
                     }),
                   child: Text(AppStrings.bookAppoimentAction)))
               ],

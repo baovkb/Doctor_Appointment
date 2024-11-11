@@ -32,4 +32,19 @@ class AppointmentRemoteDatasource {
       await _appointmentRef.child(key).set(appointment.toMap());
       return appointment;
   }
+
+  Future<void> updateAppointment({
+    required String appointment_id, 
+    String? schedule_id, 
+    String? uid, 
+    String? review_id,
+    AppointmentStatus? status}) {
+      Map<String, Object?> newVal = {
+        if (schedule_id != null) 'schedule_id': schedule_id,
+        if (uid != null) 'uid': uid,
+        if (review_id != null) 'review_id': review_id,
+        if (status != null) 'status': status.name
+      };
+      return _appointmentRef.child(appointment_id).update(newVal);
+  }
 }

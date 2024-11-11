@@ -23,14 +23,22 @@ class AppointmentDetailView extends StatefulWidget {
   final SpecialistModel specialistModel;
   final LocationModel locationModel;
   final ScheduleModel scheduleModel;
+  final AppointmentModel? appointmentModel;
+  final bool viewMode;
   
-  const AppointmentDetailView({
+  AppointmentDetailView({
     super.key,
     required this.doctorModel,
     required this.specialistModel,
     required this.locationModel,
-    required this.scheduleModel
-  });
+    required this.scheduleModel,
+    this.viewMode = true,
+    this.appointmentModel
+  }) {
+    if (this.viewMode) {
+      assert (appointmentModel != null);
+    }
+  }
 
   @override
   State<AppointmentDetailView> createState() => _AppointmentDetailViewState();
@@ -50,7 +58,7 @@ class _AppointmentDetailViewState extends State<AppointmentDetailView> {
     ThemeMode themeMode = Provider.of<ThemeNotifier>(context, listen: false).currentThemeMode;
     if (themeMode == ThemeMode.light) {
       _mainTextColor = AppColors.blackColor;
-      _cardBgColor = AppColors.whiteColor;
+      _cardBgColor = AppColors.gray4;
     } else {
       _mainTextColor = AppColors.darkWhite;
       _cardBgColor = AppColors.darkFg;
@@ -58,6 +66,9 @@ class _AppointmentDetailViewState extends State<AppointmentDetailView> {
 
     _secondaryTextColor = AppColors.gray1;
     _messageController = TextEditingController();
+    if (widget.viewMode) {
+      _messageController.text = widget.appointmentModel!.message??' ';
+    }
 
     _addAppointmentCubit = Provider.of<AddAppointmentCubit>(context, listen: false);
   }
@@ -224,6 +235,7 @@ class _AppointmentDetailViewState extends State<AppointmentDetailView> {
                   TextField(
                     minLines: 5,
                     maxLines: 5,
+                    readOnly: widget.viewMode,
                     controller: _messageController,
                     decoration: InputDecoration(
                       hintText: AppStrings.hintTextMsgForDoctor,
@@ -238,50 +250,54 @@ class _AppointmentDetailViewState extends State<AppointmentDetailView> {
                         borderSide: BorderSide(width: 0, color: Colors.transparent),
                         borderRadius: BorderRadius.circular(16)
                       ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 0, color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(16)
+                      )
                     ),
                   )      
                 ],
               ),
             ),
             SizedBox(height: 24,),
-            Center(child: BlocConsumer<AddAppointmentCubit, AddAppointmentState>(
-              listener: (context, state) {
-                if (state is AddAppointmentFailure) {
-                  debugPrint(state.message);
-                } else if (state is AddAppointmentSuccess) {
-                  showDialog(
-                    barrierDismissible: false,
-                    context: context, 
-                    builder: (_) {
-                      return SuccessDialog(
-                        message: AppStrings.bookSuccess, 
-                        textButton: AppStrings.continueAction,
-                        onButtonTap: () {
-                          Navigator.pushNamedAndRemoveUntil(context, RouteName.HOME_PAGE, (_) => false);
-                        },
-                      );
-                    }
-                  );
-                }
-              },
-              builder: (context, state) {
-                if (state is AddAppointmentLoading) {
-                  return BigPrimaryButton(child: CircularProgressIndicator(color: AppColors.whiteColor, strokeWidth: 2,));
-                } else {
-                  return BigPrimaryButton(
-                    child: Text(AppStrings.bookAppoimentAction),
-                    onPress: () {
-                      _addAppointmentCubit.addAppointment(
-                        schedule_id: widget.scheduleModel.id, 
-                        uid: FirebaseAuth.instance.currentUser!.uid, 
-                        message: _messageController.text,
-                        status: AppointmentStatus.pending);
-                    },
-                  );
-                }
-              },
-            ),
-            ),
+            if (!widget.viewMode)
+              Center(child: BlocConsumer<AddAppointmentCubit, AddAppointmentState>(
+                listener: (context, state) {
+                  if (state is AddAppointmentFailure) {
+                    debugPrint(state.message);
+                  } else if (state is AddAppointmentSuccess) {
+                    showDialog(
+                      barrierDismissible: false,
+                      context: context, 
+                      builder: (_) {
+                        return SuccessDialog(
+                          message: AppStrings.bookSuccess, 
+                          textButton: AppStrings.continueAction,
+                          onButtonTap: () {
+                            Navigator.pushNamedAndRemoveUntil(context, RouteName.HOME_PAGE, (_) => false);
+                          },
+                        );
+                      }
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is AddAppointmentLoading) {
+                    return BigPrimaryButton(child: CircularProgressIndicator(color: AppColors.whiteColor, strokeWidth: 2,));
+                  } else {
+                    return BigPrimaryButton(
+                      child: Text(AppStrings.bookAppoimentAction),
+                      onPress: () {
+                        _addAppointmentCubit.addAppointment(
+                          schedule_id: widget.scheduleModel.id, 
+                          uid: FirebaseAuth.instance.currentUser!.uid, 
+                          message: _messageController.text,
+                          status: AppointmentStatus.pending);
+                      },
+                    );
+                  }
+                },
+              ),),
           ],),
         )
       ),

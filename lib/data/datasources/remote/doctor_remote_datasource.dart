@@ -22,4 +22,26 @@ class DoctorRemoteDatasource {
       .map((mapDoc) => DoctorModel.fromMap(mapDoc as Map<Object?, Object?>))
       .toList();
   }
+
+  Future<void> updateDoctor({
+    required String id,
+    String? name,
+    String? description,
+    String? photoURL,
+    double? star,
+    String? location_id,
+    String? specialist_id,
+    List<String>? schedule_id
+  }) {
+    Map<String, dynamic> newVal = {
+      if (name != null) 'name': name,
+      if (description != null) 'description': description,
+      if (photoURL != null) 'photoURL': photoURL,
+      if (star != null) 'star': star,
+      if (location_id != null) 'location_id': location_id,
+      if (specialist_id != null) 'specialist_id': specialist_id,
+      if (schedule_id != null) 'schedule_id': schedule_id,
+    };
+    return _doctorRef.child(id).update(newVal);
+  }
 }

@@ -46,7 +46,7 @@ dependencies:
   hive: ^2.0.0
   hive_flutter: ^1.0.0
   get_it: ^8.0.1
-  fluttertoast: ^8.2.8
+  flutter_pannable_rating_bar: ^2.7.2+1
 
 dev_dependencies:
   flutter_test:

@@ -20,4 +20,16 @@ class ReviewRepository {
       return Left(UnexpectedFailure(AppStrings.unexpectedError));
     }
   }
+
+  Future<Either<Failure, ReviewModel>> addReview({
+    required String appointment_id, 
+    required double star, 
+    required String? review}) async {
+      try {
+        final reviewModel = await _datasource.addReview(appointment_id: appointment_id, star: star, review: review);
+        return Right(reviewModel);
+      } catch (e) {
+        return Left(UnexpectedFailure(e.toString()));
+      }
+  }
 }

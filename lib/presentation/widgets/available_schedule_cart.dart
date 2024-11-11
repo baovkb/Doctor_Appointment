@@ -17,7 +17,11 @@ class AvailableScheduleCart extends StatelessWidget {
   final ScheduleModel schedule;
   final LocationModel location;
   final SpecialistModel specialist;
-  final void Function(DoctorModel doctor, ScheduleModel schedule, LocationModel location, SpecialistModel specialist)? onCardTap;
+  final void Function(
+    DoctorModel doctor, 
+    ScheduleModel schedule, 
+    LocationModel location, 
+    SpecialistModel specialist)? onCardTap;
 
   const AvailableScheduleCart({
     super.key, 
