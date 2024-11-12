@@ -31,3 +31,7 @@ class PermissionFailure extends Failure {
 class DataNotFoundFailure extends Failure {
   const DataNotFoundFailure([super.message]);
 }
+
+class DataExistFailure extends Failure {
+  const DataExistFailure([super.message]);
+}

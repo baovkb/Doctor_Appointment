@@ -23,4 +23,8 @@ class TimeConverter {
   static int compareTime(String time1, String time2) {
     return convertToUnixTime(time1) - convertToUnixTime(time2);
   }
+
+  static String getUnixTime() {
+    return DateTime.now().millisecondsSinceEpoch.toString();
+  }
 }

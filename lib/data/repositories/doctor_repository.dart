@@ -42,7 +42,8 @@ class DoctorRepository {
     double? star,
     String? location_id,
     String? specialist_id,
-    List<String>? schedule_id
+    List<String>? schedule_id,
+    List<String>? chat_id
   }) async {
     try {
       await _datasource.updateDoctor(
@@ -53,9 +54,19 @@ class DoctorRepository {
         star: star,
         location_id: location_id,
         specialist_id: specialist_id,
-        schedule_id: schedule_id
+        schedule_id: schedule_id,
+        chat_id: chat_id
       );
       return Right(null);
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, List<DoctorModel>>> getDoctors() async {
+    try {
+      final result = await _datasource.getDoctors();
+      return result == null ? Left(DataNotFoundFailure(AppStrings.dataNotFound)) : Right(result);
     } catch (e) {
       return Left(UnexpectedFailure(e.toString()));
     }

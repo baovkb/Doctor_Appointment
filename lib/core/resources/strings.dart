@@ -102,5 +102,7 @@ class AppStrings {
   static const String writeReviewHint = 'Write your experience';
   static const String submitReview = 'Submit review';
   static const String reviewExist = 'This appointment has already had a review';
+  static const String typeHint = 'Type something';
+  static const String chatNotFound = 'Chat is not found';
 }
 

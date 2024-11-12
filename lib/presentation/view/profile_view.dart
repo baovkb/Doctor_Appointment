@@ -5,6 +5,8 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('this is profile');
+    return Scaffold(body: SafeArea(child: Column(
+      children: [],
+    )),);
   }
 }

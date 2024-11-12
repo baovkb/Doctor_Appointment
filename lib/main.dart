@@ -6,6 +6,8 @@ import 'package:doctor_appointment/presentation/blocs/add_review_cubit.dart';
 import 'package:doctor_appointment/presentation/blocs/auth_bloc.dart';
 import 'package:doctor_appointment/presentation/blocs/category_cubit.dart';
 import 'package:doctor_appointment/presentation/blocs/available_schedule_cubit.dart';
+import 'package:doctor_appointment/presentation/blocs/chat_cubit.dart';
+import 'package:doctor_appointment/presentation/blocs/get_doctors_cubit.dart';
 import 'package:doctor_appointment/presentation/blocs/schedule_search_cubit.dart';
 import 'package:doctor_appointment/presentation/blocs/schedules_by_ids_cubit.dart';
 import 'package:doctor_appointment/presentation/blocs/user_apppointment_cubit.dart';
@@ -77,7 +79,9 @@ class _MyAppState extends State<MyApp> {
         BlocProvider<SchedulesByIDsCubit>(create: (_) => SchedulesByIDsCubit()),
         BlocProvider<AddAppointmentCubit>(create: (_) => AddAppointmentCubit()),
         BlocProvider<UserAppointmentCubit>(create: (_) => UserAppointmentCubit()),
-        BlocProvider<AddReviewCubit>(create: (_) => AddReviewCubit())
+        BlocProvider<AddReviewCubit>(create: (_) => AddReviewCubit()),
+        BlocProvider<GetDoctorsCubit>(create: (_) => GetDoctorsCubit()),
+        BlocProvider<ChatCubit>(create: (_) => ChatCubit())
       ],
       child: Consumer<ThemeNotifier>(
         builder: (BuildContext context, ThemeNotifier value, Widget? child) { 

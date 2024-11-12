@@ -31,4 +31,9 @@ class AppIcons {
   
   // appointment card
   static const String star = 'assets/icons/Star.png';
+
+  static const String setting = 'assets/icons/settings.png';
+  static const String voiceCall = 'assets/icons/Voice_Call.png';
+  static const String videoCall = 'assets/icons/Video_Call.png';
+  static const String send = 'assets/icons/Send.png';
 }

@@ -2,6 +2,7 @@ import 'package:doctor_appointment/core/constants/route_name.dart';
 import 'package:doctor_appointment/presentation/view/appointment_detail_view.dart';
 import 'package:doctor_appointment/presentation/view/bookings_view.dart';
 import 'package:doctor_appointment/presentation/view/change_password_view.dart';
+import 'package:doctor_appointment/presentation/view/chat_conversation_view.dart';
 import 'package:doctor_appointment/presentation/view/chat_view.dart';
 import 'package:doctor_appointment/presentation/view/doctor_infor_view.dart';
 import 'package:doctor_appointment/presentation/view/forgot_password_view.dart';
@@ -107,7 +108,13 @@ class RouteGenerator {
             locationModel: args['location'], 
             scheduleModel: args['schedule'], 
             appointmentModel: args['appointment'],
-            review: args['review'],));
+            review: args['review'],),
+          settings: RouteSettings(name: RouteName.REVIEW));
+      case RouteName.CONVERSATION:
+        final args = settings.arguments as Map<String, dynamic>;
+        return MaterialPageRoute(
+          builder: (_) => ChatConversationView(doctor: args['doctor']),
+          settings: RouteSettings(name: RouteName.CONVERSATION));
       default:
         return MaterialPageRoute(
           builder: (_) => const OnboardingView(),

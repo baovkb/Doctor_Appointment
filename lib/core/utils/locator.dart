@@ -1,4 +1,5 @@
 import 'package:doctor_appointment/data/datasources/remote/appointment_remote_datasource.dart';
+import 'package:doctor_appointment/data/datasources/remote/chat_remote_datasource.dart';
 import 'package:doctor_appointment/data/datasources/remote/doctor_remote_datasource.dart';
 import 'package:doctor_appointment/data/datasources/remote/location_remote_datasource.dart';
 import 'package:doctor_appointment/data/datasources/remote/review_remote_datasource.dart';
@@ -7,6 +8,7 @@ import 'package:doctor_appointment/data/datasources/remote/specialist_remote_dat
 import 'package:doctor_appointment/data/datasources/remote/user_remote_datasource.dart';
 import 'package:doctor_appointment/data/models/user_model.dart';
 import 'package:doctor_appointment/data/repositories/appointment_repository.dart';
+import 'package:doctor_appointment/data/repositories/chat_repository.dart';
 import 'package:doctor_appointment/data/repositories/doctor_repository.dart';
 import 'package:doctor_appointment/data/repositories/location_repository.dart';
 import 'package:doctor_appointment/data/repositories/review_repository.dart';
@@ -28,6 +30,7 @@ configDependencies(Box<UserModel> box) async {
   locator.registerLazySingleton<ReviewRemoteDatasource>(() => ReviewRemoteDatasource());
   locator.registerLazySingleton<ScheduleRemoteDatasource>(() => ScheduleRemoteDatasource());
   locator.registerLazySingleton<SpecialistRemoteDatasource>(() => SpecialistRemoteDatasource());
+  locator.registerLazySingleton<ChatRemoteDatasource>(() => ChatRemoteDatasource());
 
   locator.registerLazySingleton<UserRepository>(() => UserRepository());
   locator.registerLazySingleton<AppointmentRepository>(() => AppointmentRepository());
@@ -36,4 +39,5 @@ configDependencies(Box<UserModel> box) async {
   locator.registerLazySingleton<ReviewRepository>(() => ReviewRepository());
   locator.registerLazySingleton<ScheduleRepository>(() => ScheduleRepository());
   locator.registerLazySingleton<SpecialistRepository>(() => SpecialistRepository());
+  locator.registerLazySingleton<ChatRepository>(() => ChatRepository());
 }

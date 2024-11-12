@@ -31,7 +31,8 @@ class DoctorRemoteDatasource {
     double? star,
     String? location_id,
     String? specialist_id,
-    List<String>? schedule_id
+    List<String>? schedule_id,
+    List<String>? chat_id,
   }) {
     Map<String, dynamic> newVal = {
       if (name != null) 'name': name,
@@ -41,6 +42,7 @@ class DoctorRemoteDatasource {
       if (location_id != null) 'location_id': location_id,
       if (specialist_id != null) 'specialist_id': specialist_id,
       if (schedule_id != null) 'schedule_id': schedule_id,
+      if (chat_id != null) 'chat_id': chat_id
     };
     return _doctorRef.child(id).update(newVal);
   }
