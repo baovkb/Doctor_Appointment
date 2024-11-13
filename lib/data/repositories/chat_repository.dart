@@ -42,10 +42,7 @@ class ChatRepository {
   Stream<ChatModel> getChatStream(String id) {
     return _chatRemoteDatasource.getChatStream(id).map(
       (chat) {
-        if (chat.conversation != null) {
-          final sortedConversation = chat.conversation!.entries.toList()..sort((a, b) => int.parse(a.key) - int.parse(b.key));
-          chat.conversation = Map.fromEntries(sortedConversation);
-        }
+        chat.conversation?.sort((a, b) => int.parse(a.time) - int.parse(b.time));
         return chat; 
       });
   }

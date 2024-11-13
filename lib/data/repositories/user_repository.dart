@@ -91,10 +91,6 @@ class UserRepository {
     return false;
   }
 
-  Future<void> signOut() {
-    return _datasource.signOut();
-  }
-
   Future<Either<Failure, bool>> sendPasswordResetEmail(String email) async {
     try {
       await _datasource.sendPasswordResetEmail(email);
@@ -143,6 +139,15 @@ class UserRepository {
     try {
       await _datasource.updateUser(user);
       await _userBox.put(user.uid, user);
+      return Right(null);
+    } catch (e) {
+      return Left(UnexpectedFailure(e.toString()));
+    }
+  }
+
+  Future<Either<Failure, void>> signOut() async {
+    try {
+      await _datasource.signOut();
       return Right(null);
     } catch (e) {
       return Left(UnexpectedFailure(e.toString()));

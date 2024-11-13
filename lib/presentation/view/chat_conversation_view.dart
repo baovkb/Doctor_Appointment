@@ -61,9 +61,10 @@ class _ChatConversationViewState extends State<ChatConversationView> {
             child: BlocBuilder<ChatCubit, ChatState>(
               builder: (_, state) {
                 if (state is ChatUpdated) {
-                  List<ChatMessage>? conversation = state.chat.conversation?.values.toList();
+                  List<ChatMessage>? conversation = state.chat.conversation;
                   String uid = state.chat.uid;
                   String doctor_id = state.chat.doctor_id;
+                  
                   if (conversation == null) return SizedBox();
 
                   return ListView.separated(

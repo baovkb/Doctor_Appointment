@@ -34,6 +34,10 @@ class UserCubit extends Cubit<UserState>{
       (failure) => emit(GetUserFailure(failure.message)), 
       (user) => emit(GetUserSuccess(user)));
   }
+
+  signOut() async {
+    _userRepository.signOut();
+  }
 }
 
 abstract class UserState extends Equatable {
@@ -41,6 +45,7 @@ abstract class UserState extends Equatable {
   List<Object?> get props => [];
 }
 class UserInitial extends UserState {}
+class UserLogout extends UserState {}
 class CheckEmailLoading extends UserState {}
 class CheckEmailSuccess extends UserState {
   final bool result;

@@ -34,11 +34,7 @@ class ChatCubit extends Cubit<ChatState> {
     }
 
     ChatMessage chatMessage = ChatMessage(sender_id: _uid!, message: message, time: TimeConverter.getUnixTime());
-    final either = await _chatRepository.sendMessage(_chatID!, chatMessage);
-    // either.fold(
-    //   (failure) => emit(SendMessageFailure(failure.message)), 
-    //   (_) => null
-    // );
+    _chatRepository.sendMessage(_chatID!, chatMessage);
   }
 
   startListeningToChat(String doctor_id) async {

@@ -3,7 +3,7 @@ class ChatModel {
   String id;
   String uid;
   String doctor_id;
-  Map<String, ChatMessage>? conversation;
+  List<ChatMessage>? conversation;
 
   ChatModel({
     required this.id,
@@ -16,7 +16,9 @@ class ChatModel {
     id: map['id'] as String,
     uid: map['uid'] as String,
     doctor_id: map['doctor_id'] as String,
-    conversation: (map['conversation'] as Map<Object?, Object?>?)?.map((key, value) => MapEntry(key as String, ChatMessage.fromMap(value as Map<Object?, Object?>))),
+    conversation: (map['conversation'] as Map<Object?, Object?>?)?.values.map(
+      (e) => ChatMessage.fromMap(e as Map<Object?, Object?>)
+    ).toList()
   );
 
   Map<String, Object?> toMap() {
@@ -24,7 +26,9 @@ class ChatModel {
       'id': id,
       'uid': uid,
       'doctor_id': doctor_id,
-      'conversation': conversation?.map((key, value) => MapEntry(key, value.toMap()))
+      if (conversation != null) 'conversation':  Map.fromEntries(conversation!.map(
+        (e) => MapEntry(e.time, e.toMap()))
+      )
     };
   }
 }

@@ -104,5 +104,12 @@ class AppStrings {
   static const String reviewExist = 'This appointment has already had a review';
   static const String typeHint = 'Type something';
   static const String chatNotFound = 'Chat is not found';
+  
+  //profile
+  static const String unknown = 'Unknown';
+  static const String notification = 'Notification';
+  static const String setting = 'Setting';
+  static const String help = 'Help';
+  static const String logout = 'Logout';
 }
 

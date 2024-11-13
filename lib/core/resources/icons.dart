@@ -36,4 +36,12 @@ class AppIcons {
   static const String voiceCall = 'assets/icons/Voice_Call.png';
   static const String videoCall = 'assets/icons/Video_Call.png';
   static const String send = 'assets/icons/Send.png';
+
+  //profile
+  static const String pencil = 'assets/icons/pencil.png';
+  static const String bell = 'assets/icons/bell.png';
+  static const String forward = 'assets/icons/forward.png';
+  static const String settings_filled = 'assets/icons/settings_filled.png';
+  static const String help_filled = 'assets/icons/help_filled.png';
+  static const String logout_filled = 'assets/icons/logout_filled.png';
 }

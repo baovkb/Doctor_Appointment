@@ -11,19 +11,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
-class UpcomingAppointmentCard extends StatelessWidget {
+class UpcomingAppointmentCard extends StatefulWidget {
  
   const UpcomingAppointmentCard({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider<UpComingAppointmentCubit>(
-      create: (_) => UpComingAppointmentCubit()..getUpcomingAppointment(),
-      child: _buildListCard(context),
-    );
+  State<UpcomingAppointmentCard> createState() => _UpcomingAppointmentCardState();
+}
+
+class _UpcomingAppointmentCardState extends State<UpcomingAppointmentCard> {
+  @override
+  void initState() {
+    super.initState();
+
+    Provider.of<UpComingAppointmentCubit>(context, listen: false).getUpcomingAppointment();
   }
 
-  Widget _buildListCard(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return BlocBuilder<UpComingAppointmentCubit, GetUpcomingAppoinmentState>(
       builder: (context, state) {
         if (state is GetUpcomingAppointmentLoading || state is GetUpcomingAppointmentInitial) {

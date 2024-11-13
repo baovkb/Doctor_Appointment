@@ -131,7 +131,7 @@ class _BookingTabState extends State<BookingTab> {
         child: BlocBuilder<UserAppointmentCubit, UserAppointmentState>(
           builder: (context, state) {
             if (state is UserAppointmentInitial || state is UserAppointmentLoading) {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator(color: AppColors.whiteColor, strokeWidth: 2,));
             } else if (state is UserAppointmentSuccess) {
               List<Map<String, dynamic>> result = widget.useUpcomingRes ? state.upcomingAppms : state.pastAppms;
 
