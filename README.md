@@ -4,7 +4,7 @@
 
 This app is designed to simplify the process of scheduling medical appointments. Users can easily book an appointment with trusted doctors, which brings convenience and saves time.
 
-You can try android app at [here](app-release.apk)
+You can try android app at [here](tmp/app-release.apk)
 
 <h3> Features </h3>
 
