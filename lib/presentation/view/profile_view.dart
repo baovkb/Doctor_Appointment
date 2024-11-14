@@ -177,7 +177,8 @@ class _ProfileViewState extends State<ProfileView> {
                     onTap: () {
                       Provider.of<UserCubit>(context, listen: false).signOut();
                     },
-                    child: Padding(
+                    child: Container(
+                      color: Colors.transparent,
                       padding: EdgeInsets.symmetric(horizontal: 24),
                       child: Row(
                         children: [
